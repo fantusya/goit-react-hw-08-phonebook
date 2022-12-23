@@ -1,8 +1,8 @@
 {
-  "name": "goit-react-hw-07-phonebook",
+  "name": "goit-react-hw-08-phonebook",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://fantusya.github.io/goit-react-hw-07-phonebook/",
+  "homepage": "https://fantusya.github.io/goit-react-hw-08-phonebook/",
   "dependencies": {
     "@redux-devtools/extension": "^3.2.3",
     "@reduxjs/toolkit": "^1.9.0",
@@ -17,6 +17,7 @@
     "react-icons": "^4.6.0",
     "react-loader-spinner": "^5.3.4",
     "react-redux": "^8.0.5",
+    "react-router-dom": "^6.5.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.1",
     "redux": "^4.2.0",
