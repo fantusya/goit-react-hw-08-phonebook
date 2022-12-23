@@ -1,5 +1,9 @@
-import { Form as FormikForm, Field as FormikField } from 'formik';
 import styled from 'styled-components';
+import {
+  Form as FormikForm,
+  Field as FormikField,
+  ErrorMessage as Error,
+} from 'formik';
 
 export const Form = styled(FormikForm)`
   display: inline-flex;
@@ -27,7 +31,7 @@ export const FormLabelContainer = styled.label`
 
 export const Field = styled(FormikField)`
   padding: ${p => p.theme.space[3]}px;
-  min-width: 300px;
+  min-width: 350px;
 
   font-size: ${p => p.theme.fontSizes.m};
 
@@ -79,7 +83,7 @@ export const FormLabel = styled.span`
   }
 `;
 
-export const AddContactBtn = styled.button`
+export const FormBtn = styled.button`
   display: block;
   width: 190px;
   margin: ${p => p.theme.space[0]}px;
@@ -113,7 +117,7 @@ export const AddContactBtn = styled.button`
   }
 `;
 
-export const ErrorMessageCustom = styled.span`
+export const ErrorMessageCustom = styled(Error)`
   display: block;
 
   position: absolute;
