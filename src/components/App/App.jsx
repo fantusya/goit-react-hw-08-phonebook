@@ -1,54 +1,85 @@
-import { useEffect } from 'react';
+import { useEffect, lazy } from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { useDispatch } from 'react-redux';
+import { Box } from 'components/Box/Box';
 
-import { fetchContacts } from 'redux/operations';
-import { PageTitle, ContactsTitle } from './App.styled';
-import ContactForm from '../ContactForm';
-import Filter from '../Filter';
-import ContactList from '../ContactList';
-import { Box } from '../Box/Box.jsx';
+import { PrivateRoute } from 'components/Routes/PrivateRoute';
+import { RestrictedRoute } from 'components/Routes/RestrictedRoute';
+import { useAuth } from 'hooks';
+import { refreshUser } from 'redux/auth/operations';
+import Loader from 'components/Loader';
+import SharedLayout from 'components/SharedLayout';
+import RegisterForm from 'components/RegisterForm';
+import LoginForm from 'components/LoginForm';
+
+const Home = lazy(() => import('pages/Home'));
+const AuthPage = lazy(() => import('pages/AuthPage'));
+const ContactsPage = lazy(() => import('pages/ContactsPage'));
 
 const App = () => {
   const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
+  return isRefreshing ? (
     <Box
-      pt={5}
-      pl={7}
       display="flex"
-      flexDirection="column"
-      alignItems="flex-start"
-      justifyContent="space-around"
-      gridGap={4}
+      alignItems="center"
+      justifyContent="center"
+      height="100vh"
     >
-      <PageTitle>Phonebook</PageTitle>
-      <Box
-        display="inline-flex"
-        alignItems="flex-start"
-        justifyContent="space-around"
-        gridGap="200px"
-      >
-        <Box
-          display="inline-flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <ContactForm />
-        </Box>
-        <Box>
-          <ContactsTitle>Contacts</ContactsTitle>
-          <Filter />
-          <ContactList />
-        </Box>
-      </Box>
-      <ToastContainer autoClose={3000} />
+      <Loader sizeValue="100" />
     </Box>
+  ) : (
+    <>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<Home />} />
+          <Route
+            path="register"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={
+                  <AuthPage
+                    titleName="registration"
+                    formName="Registration form"
+                    component={<RegisterForm />}
+                  />
+                }
+              />
+            }
+          />
+          <Route
+            path="login"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={
+                  <AuthPage
+                    titleName="login"
+                    formName="Login form"
+                    component={<LoginForm />}
+                  />
+                }
+              />
+            }
+          />
+          <Route
+            path="contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />}></Route>
+        </Route>
+      </Routes>
+      <ToastContainer autoClose={3000} />
+    </>
   );
 };
 

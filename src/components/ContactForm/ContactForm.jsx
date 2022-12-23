@@ -1,39 +1,42 @@
-import { Formik, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
-import { addContact } from 'redux/operations';
-import { selectContacts } from 'redux/selectors';
-
+import { addContact } from 'redux/contacts/operations';
+import { useContacts } from 'hooks';
 import {
   Form,
   FormLabelContainer,
   Field,
   FormLabel,
-  AddContactBtn,
+  FormBtn,
   ErrorMessageCustom,
-} from './ContactForm.styled';
+} from '../Form/Form.styled';
 
 const validationSchema = Yup.object({
   name: Yup.string()
-    .matches(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/)
-    .min(2, 'Too short!')
-    .max(30, 'Too long!')
-    .required('Required'),
+    .matches(
+      /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
+      'Only letters are allowed'
+    )
+    .min(2, 'At least 2 symbols')
+    .max(30, 'Maximum 30 symbols')
+    .required('Required field'),
   number: Yup.string()
     .matches(
-      /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/
+      /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
+      ' Digits are allowed'
     )
-    .min(5, 'Too short!')
-    .max(30, 'Too long!')
-    .required('Required'),
+    .min(5, 'At least 5 symbols')
+    .max(30, 'Maximum 30 symbols')
+    .required('Required field'),
 });
 
 const ContactForm = () => {
   const dispatch = useDispatch();
 
-  const contacts = useSelector(selectContacts);
+  const { contacts } = useContacts();
 
   const handleSubmit = ({ name, number }, { resetForm }) => {
     const isNameExistInPhonebook = contacts.some(
@@ -56,31 +59,25 @@ const ContactForm = () => {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
-      <Form autoComplete="off">
-        <FormLabelContainer>
-          <Field name="name" type="text" placeholder="Anne-Marie O'Connor" />
-          <FormLabel>Name</FormLabel>
-          <ErrorMessage name="name" component="span">
-            {() => (
-              <ErrorMessageCustom>
-                Letters are required (2-30 symbols)
-              </ErrorMessageCustom>
-            )}
-          </ErrorMessage>
-        </FormLabelContainer>
-        <FormLabelContainer>
-          <Field name="number" type="tel" placeholder="+38-(012)-345-67-89" />
-          <FormLabel>Number</FormLabel>
-          <ErrorMessage name="number" component="span">
-            {() => (
-              <ErrorMessageCustom>
-                Digits are required (5-20 symbols)
-              </ErrorMessageCustom>
-            )}
-          </ErrorMessage>
-        </FormLabelContainer>
-        <AddContactBtn type="submit">Add contact</AddContactBtn>
-      </Form>
+      {({ errors, touched }) => (
+        <Form autoComplete="off">
+          <FormLabelContainer>
+            <Field name="name" type="text" placeholder="Anne-Marie O'Connor" />
+            <FormLabel>Name</FormLabel>
+            {errors.name && touched.name ? (
+              <ErrorMessageCustom component="span" name="name" />
+            ) : null}
+          </FormLabelContainer>
+          <FormLabelContainer>
+            <Field name="number" type="tel" placeholder="+38-(012)-345-67-89" />
+            <FormLabel>Number</FormLabel>
+            {errors.number && touched.number ? (
+              <ErrorMessageCustom component="span" name="number" />
+            ) : null}
+          </FormLabelContainer>
+          <FormBtn type="submit">Add contact</FormBtn>
+        </Form>
+      )}
     </Formik>
   );
 };
