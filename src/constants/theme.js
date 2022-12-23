@@ -1,10 +1,12 @@
 export const theme = {
   colors: {
     white: '#fff',
+    semiWhite: 'rgba(255, 255, 255, 0.3)',
     red: '#B22222',
     silver: '#C0C0C0',
     text: '#4682B4',
     accent: '#F0F8FF',
+    secondary: '#b8bff7',
     border: '#add8e6',
     tableHead: 'rgba(240, 248, 255, 0.3)',
     tableBody: 'rgba(240, 248, 255, 0.2)',
@@ -24,6 +26,7 @@ export const theme = {
     ml: '20px',
     lm: '25px',
     l: '32px',
+    lx: '40px',
     xl: '64px',
   },
   fontWeights: {
@@ -33,6 +36,9 @@ export const theme = {
   lineHeights: {
     body: 1.5,
     heading: 1.125,
+  },
+  letterSpacing: {
+    big: '0.08em',
   },
   borders: {
     none: 'none',
