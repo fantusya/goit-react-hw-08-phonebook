@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Box } from 'components/Box/Box';
-import { ToastContainer } from 'react-toastify';
 
 import { PageTitle, ContactsTitle } from './ContactsPage.styled';
 import { fetchContacts } from 'redux/contacts/operations';
