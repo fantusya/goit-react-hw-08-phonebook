@@ -84,7 +84,7 @@ const RegisterForm = () => {
           </Form>
         )}
       </Formik>
-      {error && <Error errorText="Try another email" />}
+      {/* {error && <Error errorText="Try another email" />} */}
     </>
   );
 };

@@ -65,7 +65,7 @@ const LoginForm = () => {
           </Form>
         )}
       </Formik>
-      {error && <Error errorText="Invalid email or password" />}
+      {/* {error && <Error errorText="Invalid email or password" />} */}
     </>
   );
 };
