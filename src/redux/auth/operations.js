@@ -28,8 +28,7 @@ export const register = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
-      console.log('ERROR');
-      toast.error(`Nope`, { pauseOnHover: false });
+      toast.error(`Try another email`, { pauseOnHover: false });
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -48,7 +47,7 @@ export const logIn = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
-      toast.error(`Nope`, { pauseOnHover: false });
+      toast.error(`Invalid email or password`, { pauseOnHover: false });
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -64,7 +63,7 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     // After a successful logout, remove the token from the HTTP header
     token.unset();
   } catch (error) {
-    toast.error(`Nope`, { pauseOnHover: false });
+    toast.error(`Try again`, { pauseOnHover: false });
     return thunkAPI.rejectWithValue(error.message);
   }
 });
@@ -96,7 +95,7 @@ export const refreshUser = createAsyncThunk(
       const { data } = await axios.get('/users/current');
       return data;
     } catch (error) {
-      toast.error(`Nope`, { pauseOnHover: false });
+      toast.error(`Try again`, { pauseOnHover: false });
       return thunkAPI.rejectWithValue(error.message);
     }
   }
