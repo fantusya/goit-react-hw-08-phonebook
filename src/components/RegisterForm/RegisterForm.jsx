@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import { register } from 'redux/auth/operations';
-import { useAuth } from 'hooks';
+// import { useAuth } from 'hooks';
 // import Error from 'components/Error';
 import {
   Form,
