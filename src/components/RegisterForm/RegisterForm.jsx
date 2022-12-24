@@ -3,8 +3,6 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import { register } from 'redux/auth/operations';
-// import { useAuth } from 'hooks';
-// import Error from 'components/Error';
 import {
   Form,
   FormLabelContainer,
@@ -35,7 +33,6 @@ const validationSchema = Yup.object({
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
-  // const { error } = useAuth();
 
   const handleSubmit = ({ name, email, password }, { resetForm }) => {
     dispatch(register({ name, email, password }));
@@ -84,7 +81,6 @@ const RegisterForm = () => {
           </Form>
         )}
       </Formik>
-      {/* {error && <Error errorText="Try another email" />} */}
     </>
   );
 };
