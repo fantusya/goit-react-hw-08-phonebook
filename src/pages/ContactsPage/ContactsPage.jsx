@@ -46,7 +46,6 @@ const ContactsPage = () => {
           <ContactList />
         </Box>
       </Box>
-      {/* <ToastContainer autoClose={3000} /> */}
     </Box>
   );
 };
