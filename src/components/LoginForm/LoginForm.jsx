@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 
 import { logIn } from 'redux/auth/operations';
 import { useAuth } from 'hooks';
-import Error from 'components/Error';
+// import Error from 'components/Error';
 import {
   Form,
   FormLabelContainer,
@@ -27,7 +27,7 @@ const validationSchema = Yup.object({
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const { error } = useAuth();
+  // const { error } = useAuth();
 
   const handleSubmit = ({ email, password }, { resetForm }) => {
     dispatch(logIn({ email, password }));

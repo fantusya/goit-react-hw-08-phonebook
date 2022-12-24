@@ -5,10 +5,10 @@ const handlePending = state => {
   state.error = false;
 };
 
-const handleRejected = state => {
-  state.isLoading = false;
-  state.error = true;
-};
+// const handleRejected = state => {
+//   state.isLoading = false;
+//   state.error = true;
+// };
 
 const initialState = {
   user: { name: null, email: null },
