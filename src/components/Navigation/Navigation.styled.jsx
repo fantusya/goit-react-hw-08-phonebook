@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { Link as HomeLink } from 'react-router-dom';
 
-export const NavItem = styled.li``;
-
 export const Link = styled(HomeLink)`
   padding: ${p => p.theme.space[2]}px ${p => p.theme.space[4]}px;
 

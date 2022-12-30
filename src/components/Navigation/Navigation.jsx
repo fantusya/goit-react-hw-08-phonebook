@@ -6,7 +6,7 @@ import { FcHome, FcContacts, FcMenu } from 'react-icons/fc';
 import { useAuth } from 'hooks';
 import ModalMenu from 'components/ModalMenu';
 import AuthNav from 'components/AuthNav';
-import { NavItem, Link, MenuBtn } from './Navigation.styled';
+import { Link, MenuBtn } from './Navigation.styled';
 
 const Navigation = () => {
   const [showModal, setShowModal] = useState(false);

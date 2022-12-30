@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 import { device } from 'constants/breakpoints';
 
-export const UserMenuContainer = styled.div``;
-
-export const UsernameContainer = styled.div``;
-
 export const UserWelcome = styled.p`
   display: inline-block;
 

@@ -2,7 +2,7 @@ import { Box } from 'components/Box/Box';
 import { useAuth } from 'hooks';
 
 import { Container } from 'constants/GlobalStyle';
-import { MainTitle, WelcomeText, Link } from './Home.styled';
+import { Link } from './Home.styled';
 
 const Home = () => {
   const { isLoggedIn } = useAuth();

@@ -5,12 +5,7 @@ import { useMediaQuery } from 'react-responsive';
 
 import { logOut } from 'redux/auth/operations';
 import { useAuth } from 'hooks';
-import {
-  UserMenuContainer,
-  UsernameContainer,
-  UserWelcome,
-  LogoutBtn,
-} from './UserMenu.styled';
+import { UserWelcome, LogoutBtn } from './UserMenu.styled';
 
 const UserMenu = () => {
   const dispatch = useDispatch();
