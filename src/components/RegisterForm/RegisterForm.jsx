@@ -22,7 +22,7 @@ const validationSchema = Yup.object({
     .max(30, 'Maximum 30 symbols')
     .required('Required field'),
   email: Yup.string()
-    .email('Not valid email pattern')
+    .email('Invalid email pattern')
     .min(6, 'At least 6 symbols')
     .required('Required field'),
   password: Yup.string()
@@ -55,9 +55,9 @@ const RegisterForm = () => {
                 placeholder="Anne-Marie O'Connor"
               />
               <FormLabel>Name</FormLabel>
-              {errors.name && touched.name ? (
+              {errors.name && touched.name && (
                 <ErrorMessageCustom component="span" name="name" />
-              ) : null}
+              )}
             </FormLabelContainer>
             <FormLabelContainer>
               <Field
@@ -66,16 +66,16 @@ const RegisterForm = () => {
                 placeholder="annette@mail.com (min 5 symbols before @)"
               />
               <FormLabel>Email</FormLabel>
-              {errors.email && touched.email ? (
+              {errors.email && touched.email && (
                 <ErrorMessageCustom component="span" name="email" />
-              ) : null}
+              )}
             </FormLabelContainer>
             <FormLabelContainer>
               <Field name="password" type="password" placeholder="ann12345" />
               <FormLabel>Password</FormLabel>
-              {errors.password && touched.password ? (
+              {errors.password && touched.password && (
                 <ErrorMessageCustom component="span" name="password" />
-              ) : null}
+              )}
             </FormLabelContainer>
             <FormBtn type="submit">Register</FormBtn>
           </Form>
