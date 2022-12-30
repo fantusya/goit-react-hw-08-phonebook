@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { Box } from 'components/Box/Box';
 
+import { GlobalStyle } from 'constants/GlobalStyle';
 import { PrivateRoute } from 'components/Routes/PrivateRoute';
 import { RestrictedRoute } from 'components/Routes/RestrictedRoute';
 import { useAuth } from 'hooks';
@@ -78,6 +79,7 @@ const App = () => {
           <Route path="*" element={<Navigate to="/" replace />}></Route>
         </Route>
       </Routes>
+      <GlobalStyle />
       <ToastContainer autoClose={3000} />
     </>
   );
