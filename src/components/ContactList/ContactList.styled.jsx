@@ -20,7 +20,7 @@ export const ContactListTbody = styled.tbody`
   td {
     padding: ${p => p.theme.space[3]}px ${p => p.theme.space[4]}px;
 
-    font-size: ${p => p.theme.fontSizes.m};
+    font-size: ${p => p.theme.fontSizes[2]};
     font-family: ${p => p.theme.fonts.body};
     line-height: ${p => p.theme.lineHeights.body};
 
@@ -34,7 +34,7 @@ export const ContactListTbody = styled.tbody`
 `;
 
 export const ErrorRequest = styled.b`
-  font-size: ${p => p.theme.fontSizes.ml};
+  font-size: ${p => p.theme.fontSizes[3]};
   font-family: ${p => p.theme.fonts.body};
 
   color: ${p => p.theme.colors.error};
