@@ -2,24 +2,11 @@ import styled from 'styled-components';
 import { NavLink as Link } from 'react-router-dom';
 import { FcRightUp2 } from 'react-icons/fc';
 
-export const AuthNavUl = styled.ul`
-  margin: ${p => p.theme.space[0]}px;
-  display: flex;
-  flex-direction: column;
-  gap: ${p => p.theme.space[4]}px;
-`;
-
-export const NavItem = styled.li`
-  display: flex;
-  align-items: center;
-  gap: ${p => p.theme.space[4]}px;
-`;
-
 export const NavLink = styled(Link)`
   padding: ${p => p.theme.space[1]}px ${p => p.theme.space[3]}px;
 
   font-family: ${p => p.theme.fonts.heading};
-  font-size: ${p => p.theme.fontSizes.ml};
+  /* font-size: ${p => p.theme.fontSizes[3]}px; */
   letter-spacing: ${p => p.theme.letterSpacing.big};
 
   border: ${p => p.theme.borders.normal} ${p => p.theme.colors.transparent};

@@ -1,13 +1,6 @@
 import styled from 'styled-components';
 import { Link as HomeLink } from 'react-router-dom';
 
-export const NavUl = styled.ul`
-  margin: ${p => p.theme.space[0]}px;
-  margin-bottom: ${p => p.theme.space[5]}px;
-  display: flex;
-  gap: ${p => p.theme.space[5]}px;
-`;
-
 export const NavItem = styled.li``;
 
 export const Link = styled(HomeLink)`
@@ -18,7 +11,6 @@ export const Link = styled(HomeLink)`
   gap: ${p => p.theme.space[3]}px;
 
   font-family: ${p => p.theme.fonts.heading};
-  font-size: ${p => p.theme.fontSizes.lm};
   font-weight: ${p => p.theme.fontWeights.normal};
 
   border: ${p => p.theme.borders.normal} ${p => p.theme.colors.semiWhite};
@@ -40,4 +32,17 @@ export const Link = styled(HomeLink)`
     color: ${p => p.theme.colors.accent};
     background-color: ${p => p.theme.colors.transparent};
   }
+`;
+
+export const MenuBtn = styled.button`
+  padding: ${p => p.theme.space[0]}px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: ${p => p.theme.borders.normal} ${p => p.theme.colors.transparent};
+
+  color: ${p => p.theme.colors.accent};
+  background-color: ${p => p.theme.colors.transparent};
 `;

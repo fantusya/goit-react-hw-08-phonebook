@@ -1,24 +1,15 @@
 import styled from 'styled-components';
+import { device } from 'constants/breakpoints';
 
-export const UserMenuContainer = styled.div`
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-end;
-`;
+export const UserMenuContainer = styled.div``;
 
-export const UsernameContainer = styled.div`
-  margin-bottom: ${p => p.theme.space[4]}px;
-
-  display: flex;
-  align-items: center;
-  gap: ${p => p.theme.space[4]}px;
-`;
+export const UsernameContainer = styled.div``;
 
 export const UserWelcome = styled.p`
   display: inline-block;
 
   font-family: ${p => p.theme.fonts.heading};
-  font-size: ${p => p.theme.fontSizes.l};
+
   letter-spacing: ${p => p.theme.letterSpacing.big};
 
   color: ${p => p.theme.colors.border};
@@ -31,7 +22,10 @@ export const LogoutBtn = styled.button`
 
   text-align: center;
   font-family: ${p => p.theme.fonts.heading};
-  font-size: ${p => p.theme.fontSizes.ml};
+  font-size: ${p => p.theme.fontSizes[2]};
+  @media ${device.mobile} {
+    font-size: ${p => p.theme.fontSizes[3]};
+  }
   letter-spacing: ${p => p.theme.letterSpacing.big};
 
   outline: none;

@@ -4,14 +4,24 @@ import {
   Field as FormikField,
   ErrorMessage as Error,
 } from 'formik';
+import { device } from 'constants/breakpoints';
 
 export const Form = styled(FormikForm)`
+  @media ${device.miniMobile} {
+    padding: ${p => p.theme.space[5] + 8}px ${p => p.theme.space[4]}px;
+    gap: ${p => p.theme.space[6] - 9}px;
+  }
+  @media ${device.mobile} {
+    padding: ${p => p.theme.space[6]}px ${p => p.theme.space[5]}px;
+    gap: ${p => p.theme.space[6]}px;
+  }
+
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: ${p => p.theme.space[6]}px;
 
-  padding: ${p => p.theme.space[6]}px ${p => p.theme.space[5]}px;
+  max-width: 410px;
+  width: 100%;
 
   border-radius: ${p => p.theme.radii.normal};
   border: ${p => p.theme.borders.normal} ${p => p.theme.colors.border};
@@ -25,15 +35,25 @@ export const Form = styled(FormikForm)`
 `;
 
 export const FormLabelContainer = styled.label`
+  @media ${device.miniMobile} {
+    padding-top: ${p => p.theme.space[3]}px;
+  }
+  @media ${device.mobile} {
+    padding-top: ${p => p.theme.space[4]}px;
+  }
+
   position: relative;
-  padding-top: ${p => p.theme.space[4]}px;
+
+  width: 100%;
 `;
 
 export const Field = styled(FormikField)`
-  padding: ${p => p.theme.space[3]}px;
-  min-width: 350px;
+  padding: ${p => p.theme.space[2] + 2}px;
 
-  font-size: ${p => p.theme.fontSizes.m};
+  width: 100%;
+
+  font-size: ${p => p.theme.fontSizes[2]};
+  line-height: ${p => p.theme.lineHeights.body};
 
   outline: none;
   border: ${p => p.theme.borders.normal} ${p => p.theme.colors.border};
@@ -48,20 +68,29 @@ export const Field = styled(FormikField)`
 
   &:focus::placeholder {
     opacity: 1;
-    font-size: ${p => p.theme.fontSizes.m};
+    font-size: ${p => p.theme.fontSizes[2]};
     color: ${p => p.theme.colors.silver};
   }
 `;
 
 export const FormLabel = styled.span`
+  @media ${device.miniMobile} {
+    font-size: ${p => p.theme.fontSizes[1]};
+
+    transform: translate(10px, 20px);
+  }
+  @media ${device.mobile} {
+    font-size: ${p => p.theme.fontSizes[2]};
+
+    transform: translate(10px, 26px);
+  }
+
   position: absolute;
   top: 0;
   left: 0;
-  transform: translate(10px, 22px);
 
   font-family: ${p => p.theme.fonts.body};
   font-weight: ${p => p.theme.fontWeights.bold};
-  font-size: ${p => p.theme.fontSizes.m};
 
   color: ${p => p.theme.colors.text};
 
@@ -69,8 +98,15 @@ export const FormLabel = styled.span`
 
   ${Field}:focus+&,
   ${Field}:not(:placeholder-shown)+& {
+    @media ${device.miniMobile} {
+      padding: ${p => p.theme.space[2] + 1}px;
+    }
+    @media ${device.mobile} {
+      padding: ${p => p.theme.space[2] + 2}px;
+    }
+
     display: block;
-    padding: 6px;
+    transform: translate(0px, -25px);
 
     border-radius: ${p => p.theme.radii.normal};
     outline: ${p => p.theme.borders.normal} ${p => p.theme.colors.border};
@@ -78,14 +114,22 @@ export const FormLabel = styled.span`
     color: ${p => p.theme.colors.white};
     background: #7f7fd5;
     background: linear-gradient(to bottom, #91eae4, #86a8e7, #7f7fd5);
-
-    transform: translate(0px, -30px);
   }
 `;
 
 export const FormBtn = styled.button`
+  @media ${device.miniMobile} {
+    padding: ${p => p.theme.space[4] - 4}px;
+
+    font-size: ${p => p.theme.fontSizes[1]};
+  }
+
+  @media ${device.mobile} {
+    padding: ${p => p.theme.space[4]}px;
+  }
+
   display: block;
-  width: 190px;
+  min-width: 180px;
   margin: ${p => p.theme.space[0]}px;
   padding: ${p => p.theme.space[4]}px;
   text-align: center;
@@ -118,15 +162,24 @@ export const FormBtn = styled.button`
 `;
 
 export const ErrorMessageCustom = styled(Error)`
+  @media ${device.miniMobile} {
+    bottom: -21px;
+
+    font-size: ${p => p.theme.fontSizes[1]};
+  }
+  @media ${device.mobile} {
+    bottom: -25px;
+
+    font-size: ${p => p.theme.fontSizes[2]};
+  }
+
   display: block;
 
   position: absolute;
-  bottom: -25px;
   left: 10px;
 
   font-weight: ${p => p.theme.fontWeights.bold};
   font-family: ${p => p.theme.fonts.monospace};
-  font-size: ${p => p.theme.fontSizes.s};
 
   color: ${p => p.theme.colors.red};
 `;
