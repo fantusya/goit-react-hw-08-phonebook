@@ -47,16 +47,16 @@ const LoginForm = () => {
                 placeholder="annette@mail.com (min 5 symbols before @)"
               />
               <FormLabel>Email</FormLabel>
-              {errors.email && touched.email ? (
+              {errors.email && touched.email && (
                 <ErrorMessageCustom component="span" name="email" />
-              ) : null}
+              )}
             </FormLabelContainer>
             <FormLabelContainer>
               <Field name="password" type="password" placeholder="ann12345" />
               <FormLabel>Password</FormLabel>
-              {errors.password && touched.password ? (
+              {errors.password && touched.password && (
                 <ErrorMessageCustom component="span" name="password" />
-              ) : null}
+              )}
             </FormLabelContainer>
             <FormBtn type="submit">Log In</FormBtn>
           </Form>

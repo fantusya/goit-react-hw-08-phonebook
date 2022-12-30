@@ -64,16 +64,16 @@ const ContactForm = () => {
           <FormLabelContainer>
             <Field name="name" type="text" placeholder="Anne-Marie O'Connor" />
             <FormLabel>Name</FormLabel>
-            {errors.name && touched.name ? (
+            {errors.name && touched.name && (
               <ErrorMessageCustom component="span" name="name" />
-            ) : null}
+            )}
           </FormLabelContainer>
           <FormLabelContainer>
             <Field name="number" type="tel" placeholder="+38-(012)-345-67-89" />
             <FormLabel>Number</FormLabel>
-            {errors.number && touched.number ? (
+            {errors.number && touched.number && (
               <ErrorMessageCustom component="span" name="number" />
-            ) : null}
+            )}
           </FormLabelContainer>
           <FormBtn type="submit">Add contact</FormBtn>
         </Form>
