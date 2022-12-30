@@ -20,8 +20,6 @@ const ModalMenu = ({ onClose, children }) => {
   }, [onClose]);
 
   const handleBackdropClick = e => {
-    // console.log('e.currentTarget', e.currentTarget);
-    // console.log('e.target', e.target);
     if (e.currentTarget === e.target || e.target.nodeName === 'A') onClose();
   };
 
