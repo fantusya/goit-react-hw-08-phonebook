@@ -1,13 +1,5 @@
 import styled from 'styled-components';
 
-export const FilterLabelContainer = styled.label`
-  display: flex;
-  flex-direction: column;
-  gap: ${p => p.theme.space[4]}px;
-
-  margin-bottom: ${p => p.theme.space[5]}px;
-`;
-
 export const FilterLabel = styled.p`
   color: ${p => p.theme.colors.accent};
 `;

@@ -3,11 +3,7 @@ import { Box } from 'components/Box/Box';
 import { useDispatch } from 'react-redux';
 import { setFilter } from 'redux/contacts/filterSlice';
 
-import {
-  FilterLabelContainer,
-  FilterLabel,
-  FilterInput,
-} from './Filter.styled';
+import { FilterLabel, FilterInput } from './Filter.styled';
 
 const Filter = () => {
   const dispatch = useDispatch();
