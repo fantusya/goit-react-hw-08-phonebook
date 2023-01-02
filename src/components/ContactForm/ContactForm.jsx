@@ -6,13 +6,13 @@ import { toast } from 'react-toastify';
 import { addContact } from 'redux/contacts/operations';
 import { useContacts } from 'hooks';
 import {
-  Form,
   FormLabelContainer,
   Field,
   FormLabel,
   FormBtn,
   ErrorMessageCustom,
 } from '../Form/Form.styled';
+import { Form } from './ContactForm.styled';
 
 const validationSchema = Yup.object({
   name: Yup.string()
