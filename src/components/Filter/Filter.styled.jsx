@@ -6,10 +6,9 @@ export const FilterLabelContainer = styled.label`
   gap: ${p => p.theme.space[4]}px;
 
   margin-bottom: ${p => p.theme.space[5]}px;
-  color: ${p => p.theme.colors.accent};
 `;
 
-export const FilterLabel = styled.span`
+export const FilterLabel = styled.p`
   color: ${p => p.theme.colors.accent};
 `;
 
