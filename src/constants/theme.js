@@ -32,6 +32,7 @@ export const theme = {
     '28px',
     '32px',
     '40px',
+    '50px',
     '64px',
   ],
   fontWeights: {
