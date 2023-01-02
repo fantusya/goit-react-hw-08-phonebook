@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box } from 'components/Box/Box';
 import { useDispatch } from 'react-redux';
 import { setFilter } from 'redux/contacts/filterSlice';
 
@@ -13,10 +14,16 @@ const Filter = () => {
   const handleFilter = e => dispatch(setFilter(e.currentTarget.value));
 
   return (
-    <FilterLabelContainer>
+    <Box
+      display={'flex'}
+      flexDirection="column"
+      alignItems={['center', null, null, null, 'flex-start']}
+      gridGap={4}
+      mb={5}
+    >
       <FilterLabel>Find contacts by name</FilterLabel>
       <FilterInput type="text" onChange={handleFilter} />
-    </FilterLabelContainer>
+    </Box>
   );
 };
 
