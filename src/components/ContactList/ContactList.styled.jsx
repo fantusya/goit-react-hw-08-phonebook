@@ -12,7 +12,7 @@ export const ContactListThead = styled.thead`
 
   th {
     padding: ${p => p.theme.space[4]}px ${p => p.theme.space[5]}px;
-    width: 320px;
+    width: 300px;
   }
 `;
 
@@ -38,4 +38,19 @@ export const ErrorRequest = styled.b`
   font-family: ${p => p.theme.fonts.body};
 
   color: ${p => p.theme.colors.error};
+`;
+
+export const MobileContactItem = styled.li`
+  :not(:last-child) {
+    padding-bottom: ${p => p.theme.space[4]}px;
+
+    ::after {
+      content: '';
+      display: block;
+      margin-top: ${p => p.theme.space[3]}px;
+      width: 100%;
+      height: 1px;
+      background-color: white;
+    }
+  }
 `;

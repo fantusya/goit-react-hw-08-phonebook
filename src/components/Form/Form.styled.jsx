@@ -126,6 +126,8 @@ export const FormBtn = styled.button`
 
   @media ${device.mobile} {
     padding: ${p => p.theme.space[4]}px;
+
+    font-size: ${p => p.theme.fontSizes[1]};
   }
 
   display: block;
