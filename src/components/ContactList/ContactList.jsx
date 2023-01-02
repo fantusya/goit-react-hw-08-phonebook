@@ -1,4 +1,6 @@
 import React from 'react';
+import { useMediaQuery } from 'react-responsive';
+import { Box } from 'components/Box/Box';
 import { FcConferenceCall, FcPhoneAndroid, FcCancel } from 'react-icons/fc';
 
 import { useContacts } from 'hooks';
@@ -9,6 +11,7 @@ import {
   ContactListTbody,
   ContactListThead,
   ErrorRequest,
+  MobileContactItem,
 } from './ContactList.styled';
 
 const ContactList = () => {
@@ -17,7 +20,11 @@ const ContactList = () => {
   const { isLoading } = useContacts();
   const { error } = useContacts();
 
-  return (
+  const isMobile = useMediaQuery({
+    query: '(min-device-width: 480px)',
+  });
+
+  return isMobile ? (
     <ContactListTable>
       <ContactListThead>
         <tr>
@@ -43,6 +50,23 @@ const ContactList = () => {
         ))}
       </ContactListTbody>
     </ContactListTable>
+  ) : (
+    <>
+      {isLoading && !error && <Loader sizeValue="60" />}
+      {error && (
+        <>
+          <FcCancel size={60} />
+          <ErrorRequest>Error! Try again!</ErrorRequest>
+        </>
+      )}
+      <Box as="ul" display="flex" flexDirection="column" gridGap={4}>
+        {visibleContacts.map(contact => (
+          <MobileContactItem key={contact.id}>
+            <ContactItem contact={contact} />
+          </MobileContactItem>
+        ))}
+      </Box>
+    </>
   );
 };
 
