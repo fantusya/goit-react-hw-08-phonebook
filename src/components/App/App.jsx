@@ -6,7 +6,7 @@ import { Box } from 'components/Box/Box';
 
 import { GlobalStyle } from 'constants/GlobalStyle';
 import { PrivateRoute } from 'components/Routes/PrivateRoute';
-import { RestrictedRoute } from 'components/Routes/RestrictedRoute';
+import { RestrictedRoute, RestrictedRouteRegister } from 'components/Routes/RestrictedRoute';
 import { useAuth } from 'hooks';
 import { refreshUser } from 'redux/auth/operations';
 import Loader from 'components/Loader';
@@ -43,8 +43,7 @@ const App = () => {
           <Route
             path="register"
             element={
-              <RestrictedRoute
-                redirectTo="/contacts"
+              <RestrictedRouteRegister
                 component={
                   <AuthPage
                     titleName="registration"
@@ -75,8 +74,8 @@ const App = () => {
             element={
               <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
             }
-          />
-          <Route path="*" element={<Navigate to="/" replace />}></Route>
+            />
+          <Route path="*" element={<Navigate to="/" replace />}/>
         </Route>
       </Routes>
       <GlobalStyle />

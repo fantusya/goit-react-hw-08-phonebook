@@ -28,7 +28,7 @@ export const ContactListTbody = styled.tbody`
     background-color: ${p => p.theme.colors.tableBody};
   }
 
-  td:nth-of-type(3n + 3) {
+  td:nth-of-type(n + 3) {
     background-color: ${p => p.theme.colors.transparent};
   }
 `;

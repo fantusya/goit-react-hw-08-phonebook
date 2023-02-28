@@ -7,7 +7,8 @@ import axios from 'axios';
 //   fetchingError,
 // } from './contactsSlice';
 
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
+// axios.defaults.baseURL = 'https://my-phonebook-app.herokuapp.com';
+axios.defaults.baseURL = 'http://localhost:3000';
 
 // export const fetchContacts = () => async dispatch => {
 //   try {
@@ -26,7 +27,7 @@ export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
     try {
-      const { data } = await axios.get('/contacts');
+      const { data } = await axios.get('api/contacts');
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -38,7 +39,7 @@ export const addContact = createAsyncThunk(
   'contacts/addContact',
   async (contact, thunkAPI) => {
     try {
-      const { data } = await axios.post('/contacts', contact);
+      const { data } = await axios.post('api/contacts', contact);
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -50,7 +51,31 @@ export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async (contactId, thunkAPI) => {
     try {
-      const { data } = await axios.delete(`/contacts/${contactId}`);
+      const { data } = await axios.delete(`api/contacts/${contactId}`);
+      return data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const updateContact = createAsyncThunk(
+  'contacts/updateContact',
+  async ({contactId, name, phone}, thunkAPI) => {
+    try {
+      const { data } = await axios.put(`api/contacts/${contactId}`, {name, phone});
+      return data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const updateFavorite = createAsyncThunk(
+  'contacts/updateFavorite',
+  async ({contactId, favorite}, thunkAPI) => {
+    try {
+      const { data } = await axios.patch(`api/contacts/${contactId}/favorite`, {favorite});
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

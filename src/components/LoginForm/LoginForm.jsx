@@ -18,7 +18,7 @@ const validationSchema = Yup.object({
     .min(6, 'At least 6 symbols')
     .required('Required field'),
   password: Yup.string()
-    .min(7, 'At least 7 symbols')
+    // .min(7, 'At least 7 symbols')
     .max(30, 'Maximum 30 symbols')
     .required('Required field'),
 });

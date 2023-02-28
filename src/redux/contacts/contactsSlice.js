@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { fetchContacts, addContact, deleteContact } from './operations';
+import { fetchContacts, addContact, deleteContact, updateContact, updateFavorite } from './operations';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -18,32 +18,51 @@ const contactsSlice = createSlice({
     error: null,
   },
   extraReducers: {
-    [fetchContacts.pending]: handlePending,
     [fetchContacts.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
       state.contactItems = action.payload;
     },
-    [fetchContacts.rejected]: handleRejected,
-
-    [addContact.pending]: handlePending,
     [addContact.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
       state.contactItems.push(action.payload);
     },
-    [addContact.rejected]: handleRejected,
-
-    [deleteContact.pending]: handlePending,
     [deleteContact.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
       const index = state.contactItems.findIndex(
-        contact => contact.id === action.payload.id
+        contact => contact._id === action.meta.arg
       );
       state.contactItems.splice(index, 1);
     },
+    [updateContact.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      const index = state.contactItems.findIndex(
+        contact => contact._id === action.payload._id
+      );
+      state.contactItems.splice(index, 1, action.payload);
+    },
+    [updateFavorite.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      const contact = state.contactItems.find(
+        contact => contact._id === action.payload._id
+      );
+      contact.favorite =  action.payload.favorite;
+    },
+    [fetchContacts.pending]: handlePending,
+    [addContact.pending]: handlePending,
+    [deleteContact.pending]: handlePending,
+    [updateContact.pending]: handlePending,
+    [updateFavorite.pending]: handlePending ,
+    [fetchContacts.rejected]: handleRejected,
+    [addContact.rejected]: handleRejected,
     [deleteContact.rejected]: handleRejected,
+    [updateContact.rejected]: handleRejected,
+    [updateFavorite.rejected]: handleRejected,
+
   },
   // reducers: {
   //   // start of HTTP-request

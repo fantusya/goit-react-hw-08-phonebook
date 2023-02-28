@@ -23,7 +23,7 @@ const validationSchema = Yup.object({
     .min(2, 'At least 2 symbols')
     .max(30, 'Maximum 30 symbols')
     .required('Required field'),
-  number: Yup.string()
+  phone: Yup.string()
     .matches(
       /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
       ' Digits are allowed'
@@ -38,7 +38,7 @@ const ContactForm = () => {
 
   const { contacts } = useContacts();
 
-  const handleSubmit = ({ name, number }, { resetForm }) => {
+  const handleSubmit = ({ name, phone }, { resetForm }) => {
     const isNameExistInPhonebook = contacts.some(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
@@ -49,13 +49,13 @@ const ContactForm = () => {
       return;
     }
 
-    dispatch(addContact({ name, number }));
+    dispatch(addContact({ name, phone }));
     resetForm();
   };
 
   return (
     <Formik
-      initialValues={{ name: '', number: '' }}
+      initialValues={{ name: '', phone: '' }}
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
@@ -69,10 +69,10 @@ const ContactForm = () => {
             )}
           </FormLabelContainer>
           <FormLabelContainer>
-            <Field name="number" type="tel" placeholder="+38-(012)-345-67-89" />
+            <Field name="phone" type="tel" placeholder="+38-(012)-345-67-89" />
             <FormLabel>Number</FormLabel>
-            {errors.number && touched.number && (
-              <ErrorMessageCustom component="span" name="number" />
+            {errors.phone && touched.phone && (
+              <ErrorMessageCustom component="span" name="phone" />
             )}
           </FormLabelContainer>
           <FormBtn type="submit">Add contact</FormBtn>

@@ -15,10 +15,11 @@ import {
 } from './ContactList.styled';
 
 const ContactList = () => {
-  const { visibleContacts } = useContacts();
-  const { contacts } = useContacts();
-  const { isLoading } = useContacts();
-  const { error } = useContacts();
+  const { visibleContacts, contacts, isLoading, error } = useContacts();
+  // console.log(visibleContacts);
+  // const { contacts } = useContacts();
+  // const { isLoading } = useContacts();
+  // const { error } = useContacts();
 
   const isMobile = useMediaQuery({
     query: '(min-device-width: 480px)',
@@ -44,7 +45,7 @@ const ContactList = () => {
       </ContactListThead>
       <ContactListTbody>
         {visibleContacts.map(contact => (
-          <tr key={contact.id}>
+          <tr key={contact._id}>
             <ContactItem contact={contact} />
           </tr>
         ))}
@@ -61,7 +62,7 @@ const ContactList = () => {
       )}
       <Box as="ul" display="flex" flexDirection="column" gridGap={4}>
         {visibleContacts.map(contact => (
-          <MobileContactItem key={contact.id}>
+          <MobileContactItem key={contact._id}>
             <ContactItem contact={contact} />
           </MobileContactItem>
         ))}
