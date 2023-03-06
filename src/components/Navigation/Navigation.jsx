@@ -5,6 +5,7 @@ import { FcHome, FcContacts, FcMenu } from 'react-icons/fc';
 
 import { useAuth } from 'hooks';
 import ModalMenu from 'components/ModalMenu';
+import { ModalNavContent } from 'components/ModalMenu/ModalMenu.styled';
 import AuthNav from 'components/AuthNav';
 import { Link, MenuBtn } from './Navigation.styled';
 
@@ -54,7 +55,9 @@ const Navigation = () => {
 
       {showModal && !isLoggedIn && !isMobile && (
         <ModalMenu onClose={() => setShowModal(!showModal)}>
-          <AuthNav />
+          <ModalNavContent>
+            <AuthNav />
+          </ModalNavContent>
         </ModalMenu>
       )}
     </>

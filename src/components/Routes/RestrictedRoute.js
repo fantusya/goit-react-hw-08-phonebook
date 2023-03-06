@@ -1,7 +1,5 @@
 import { Navigate } from 'react-router-dom';
 import { useAuth } from 'hooks';
-// import { useDispatch } from 'react-redux';
-// import { verifyEmail } from 'redux/auth/operations';
 
 /**
  * - If the route is restricted and the user is logged in, render a <Navigate> to redirectTo.
@@ -13,14 +11,10 @@ export const RestrictedRoute = ({ component: Component, redirectTo = '/' }) => {
   return isLoggedIn && !needToVerify ? <Navigate to={redirectTo} /> : Component;
 };
 
-export const RestrictedRouteRegister = ({ component: Component, redirectTo = '/' }) => {
+export const RestrictedRouteRegister = ({
+  successRegister: MessageComponent,
+  failedOrNotRegistered: Form,
+}) => {
   const { needToVerify } = useAuth();
-  // const verificationToken = user.verificationToken;
-
-  // const dispatch = useDispatch();
-  // const handleVerification = () => dispatch(verifyEmail(verificationToken));
-  // console.log(user);
-
-  // return needToVerify ? <button type="button" onClick={handleVerification}>VERIFY PLEASE</button> : Component;
-    return needToVerify ? <p color="white">GO TO EMAIL</p> : Component;
+  return needToVerify ? MessageComponent : Form;
 };

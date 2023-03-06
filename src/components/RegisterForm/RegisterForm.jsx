@@ -1,7 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
+import { registerValidationSchema } from 'helpers/validationSchemas';
+import { useAuth } from 'hooks';
 import { register } from 'redux/auth/operations';
 import {
   Form,
@@ -12,25 +14,6 @@ import {
   ErrorMessageCustom,
 } from '../Form/Form.styled';
 
-const validationSchema = Yup.object({
-  name: Yup.string()
-    .matches(
-      /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
-      'Only letters are allowed'
-    )
-    .min(2, 'At least 2 symbols')
-    .max(30, 'Maximum 30 symbols')
-    .required('Required field'),
-  email: Yup.string()
-    .email('Invalid email pattern')
-    .min(6, 'At least 6 symbols')
-    .required('Required field'),
-  password: Yup.string()
-    .min(7, 'At least 7 symbols')
-    .max(30, 'Maximum 30 symbols')
-    .required('Required field'),
-});
-
 const RegisterForm = () => {
   const dispatch = useDispatch();
 
@@ -39,12 +22,18 @@ const RegisterForm = () => {
     resetForm();
   };
 
+  const { error } = useAuth();
+  if (error) {
+    console.log('HI FROM error', error);
+    toast.error('error', { pauseOnHover: false });
+  }
+
   return (
     <>
       <Formik
         initialValues={{ name: '', email: '', password: '' }}
         onSubmit={handleSubmit}
-        validationSchema={validationSchema}
+        validationSchema={registerValidationSchema}
       >
         {({ errors, touched }) => (
           <Form autoComplete="off">

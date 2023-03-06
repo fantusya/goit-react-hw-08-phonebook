@@ -185,3 +185,24 @@ export const ErrorMessageCustom = styled(Error)`
 
   color: ${p => p.theme.colors.red};
 `;
+
+export const VerifyMessage = styled.p`
+  margin-top: ${p => p.theme.space[4]}px;
+  padding-bottom: ${p => p.theme.space[4]}px;
+  line-height: ${p => p.theme.lineHeights.body};
+  color: ${p => p.theme.colors.accent};
+`;
+
+export const ResendEmail = styled.button`
+  margin: ${p => p.theme.space[0]}px;
+  padding: ${p => p.theme.space[2]}px;
+
+  outline: ${p => p.theme.borders.normal} ${p => p.theme.colors.transparent};
+  border: ${p => p.theme.borders.normal} ${p => p.theme.colors.transparent};
+  border-radius: ${p => p.theme.radii.normal};
+
+  color: ${p => p.theme.colors.accent};
+  background-color: ${p => p.theme.colors.semiWhite};
+
+  cursor: pointer;
+`;

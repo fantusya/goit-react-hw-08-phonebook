@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { register, logIn, logOut, refreshUser, updateAvatar } from './operations';
+import {
+  register,
+  logIn,
+  logOut,
+  refreshUser,
+  updateAvatar,
+} from './operations';
 
 const handlePending = state => {
   state.isRefreshing = true;
@@ -7,23 +13,23 @@ const handlePending = state => {
 
 const handleRejected = (state, action) => {
   state.isRefreshing = false;
-  state.error = action.payload;
+  state.error = action.payload.message;
 };
 
 const initialState = {
   user: {
     // name: null,
     email: null,
-    subscription: "starter",
+    subscription: 'starter',
     verificationToken: null,
     verify: false,
-    avatarURL: null
+    avatarURL: null,
   },
   token: null,
   isLoggedIn: false,
-  isVerified: false,
   needToVerify: false,
   isRefreshing: false,
+  error: false,
 };
 
 const authSlice = createSlice({
@@ -35,11 +41,8 @@ const authSlice = createSlice({
 
       state.needToVerify = true;
       state.isRefreshing = false;
+      state.error = false;
     },
-    // [verifyEmail.fulfilled](state, action) {
-    //   state.needToVerify = false;
-    //   state.isVerified = true;
-    // },
     [logIn.fulfilled](state, action) {
       state.user = action.payload.user;
       state.token = action.payload.token;
@@ -47,39 +50,43 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.needToVerify = false;
       state.isRefreshing = false;
-      console.log("logIn.fulfilled state.user", state.user);
+      state.error = false;
     },
     [logOut.fulfilled](state) {
       state.user = {
         email: null,
-        subscription: "starter",
+        subscription: 'starter',
         verificationToken: null,
         verify: false,
-        avatarURL: null
+        avatarURL: null,
       };
       state.token = null;
-      
+
       state.isLoggedIn = false;
       state.isRefreshing = false;
+      state.error = false;
     },
     [refreshUser.fulfilled](state, action) {
       state.user = action.payload;
 
       state.isLoggedIn = true;
       state.isRefreshing = false;
-      console.log("logIn.fulfilled state.user", state.user);
+      state.error = false;
     },
     [updateAvatar.fulfilled](state, action) {
       state.user.avatarURL = action.payload.avatarURL;
+
       state.isRefreshing = false;
-      console.log("state.user.avatarURL", state.user.avatarURL);
-      console.log("action.payload.avatarURL", action.payload.avatarURL);
+      state.error = false;
     },
     [register.pending]: handlePending,
     [logIn.pending]: handlePending,
     [logOut.pending]: handlePending,
     [refreshUser.pending]: handlePending,
     [updateAvatar.pending]: handlePending,
+    [register.rejected]: handleRejected,
+    [logIn.rejected]: handleRejected,
+    [logOut.rejected]: handleRejected,
     [refreshUser.rejected]: handleRejected,
     [updateAvatar.rejected]: handleRejected,
   },

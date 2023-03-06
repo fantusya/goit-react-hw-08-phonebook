@@ -2,8 +2,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-// axios.defaults.baseURL = 'https://my-phonebook-app.herokuapp.com';
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'https://my-phonebook-app.herokuapp.com';
+// axios.defaults.baseURL = 'http://localhost:3000';
 
 const token = {
   set(token) {
@@ -23,13 +23,11 @@ export const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.post('api/users/signup', credentials);
-      console.log(data);
-      // After successful registration, add the token to the HTTP header
-      // token.set(data.token);
       return data;
     } catch (error) {
       toast.error(`Try another email`, { pauseOnHover: false });
-      return thunkAPI.rejectWithValue(error.message);
+      console.log(error.response.data);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
@@ -42,14 +40,15 @@ export const logIn = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
     try {
-      const {data} = await axios.post('api/users/login', credentials);
-      console.log(data);
+      const { data } = await axios.post('api/users/login', credentials);
+      console.log('data', data);
       // After successful login, add the token to the HTTP header
       token.set(data.token);
       return data;
     } catch (error) {
-      toast.error(`Invalid email or password`, { pauseOnHover: false });
-      return thunkAPI.rejectWithValue(error.message);
+      // console.log('error', error.response.data);
+      // toast.error(`Invalid email or password`, { pauseOnHover: false });
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
@@ -109,7 +108,7 @@ export const updateAvatar = createAsyncThunk(
   async (avatar, thunkAPI) => {
     try {
       const { data } = await axios.post(`api/users/avatars`, avatar);
-      console.log("DATA", data);
+      console.log('DATA', data);
       // token.set(data.token);
       return data;
     } catch (error) {
@@ -124,6 +123,21 @@ export const verifyEmail = createAsyncThunk(
   async (verificationToken, thunkAPI) => {
     try {
       const { data } = await axios.get(`api/users/verify/${verificationToken}`);
+      console.log(data);
+      // token.set(data.token);
+      return data;
+    } catch (error) {
+      toast.error(`Try another email`, { pauseOnHover: false });
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const resendVerifyEmail = createAsyncThunk(
+  'auth/resendVerifyEmail',
+  async (email, thunkAPI) => {
+    try {
+      const { data } = await axios.post(`api/users/verify`, email);
       console.log(data);
       // token.set(data.token);
       return data;

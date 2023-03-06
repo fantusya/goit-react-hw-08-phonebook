@@ -6,13 +6,17 @@ import { Box } from 'components/Box/Box';
 
 import { GlobalStyle } from 'constants/GlobalStyle';
 import { PrivateRoute } from 'components/Routes/PrivateRoute';
-import { RestrictedRoute, RestrictedRouteRegister } from 'components/Routes/RestrictedRoute';
+import {
+  RestrictedRoute,
+  RestrictedRouteRegister,
+} from 'components/Routes/RestrictedRoute';
 import { useAuth } from 'hooks';
 import { refreshUser } from 'redux/auth/operations';
 import Loader from 'components/Loader';
 import SharedLayout from 'components/SharedLayout';
 import RegisterForm from 'components/RegisterForm';
 import LoginForm from 'components/LoginForm';
+import Message from 'components/SuccessRegister';
 
 const Home = lazy(() => import('pages/Home'));
 const AuthPage = lazy(() => import('pages/AuthPage'));
@@ -44,7 +48,8 @@ const App = () => {
             path="register"
             element={
               <RestrictedRouteRegister
-                component={
+                successRegister={<Message />}
+                failedOrNotRegistered={
                   <AuthPage
                     titleName="registration"
                     formName="Registration form"
@@ -74,8 +79,8 @@ const App = () => {
             element={
               <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
             }
-            />
-          <Route path="*" element={<Navigate to="/" replace />}/>
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
       <GlobalStyle />

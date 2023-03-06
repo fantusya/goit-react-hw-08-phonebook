@@ -7,8 +7,8 @@ import axios from 'axios';
 //   fetchingError,
 // } from './contactsSlice';
 
-// axios.defaults.baseURL = 'https://my-phonebook-app.herokuapp.com';
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'https://my-phonebook-app.herokuapp.com';
+// axios.defaults.baseURL = 'http://localhost:3000';
 
 // export const fetchContacts = () => async dispatch => {
 //   try {
@@ -61,9 +61,12 @@ export const deleteContact = createAsyncThunk(
 
 export const updateContact = createAsyncThunk(
   'contacts/updateContact',
-  async ({contactId, name, phone}, thunkAPI) => {
+  async ({ contactId, name, phone }, thunkAPI) => {
     try {
-      const { data } = await axios.put(`api/contacts/${contactId}`, {name, phone});
+      const { data } = await axios.put(`api/contacts/${contactId}`, {
+        name,
+        phone,
+      });
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -73,9 +76,11 @@ export const updateContact = createAsyncThunk(
 
 export const updateFavorite = createAsyncThunk(
   'contacts/updateFavorite',
-  async ({contactId, favorite}, thunkAPI) => {
+  async ({ contactId, favorite }, thunkAPI) => {
     try {
-      const { data } = await axios.patch(`api/contacts/${contactId}/favorite`, {favorite});
+      const { data } = await axios.patch(`api/contacts/${contactId}/favorite`, {
+        favorite,
+      });
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
