@@ -1,10 +1,12 @@
+import { useEffect } from 'react';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import { addContact } from 'redux/contacts/operations';
+import { changeError } from 'redux/auth/slice';
 import { useContacts } from 'hooks';
+import { contactValidationSchema } from 'helpers/validationSchemas';
 import {
   FormLabelContainer,
   Field,
@@ -14,29 +16,10 @@ import {
 } from '../Form/Form.styled';
 import { Form } from './ContactForm.styled';
 
-const validationSchema = Yup.object({
-  name: Yup.string()
-    .matches(
-      /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
-      'Only letters are allowed'
-    )
-    .min(2, 'At least 2 symbols')
-    .max(30, 'Maximum 30 symbols')
-    .required('Required field'),
-  phone: Yup.string()
-    .matches(
-      /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
-      ' Digits are allowed'
-    )
-    .min(5, 'At least 5 symbols')
-    .max(30, 'Maximum 30 symbols')
-    .required('Required field'),
-});
-
 const ContactForm = () => {
   const dispatch = useDispatch();
 
-  const { contacts } = useContacts();
+  const { contacts, error } = useContacts();
 
   const handleSubmit = ({ name, phone }, { resetForm }) => {
     const isNameExistInPhonebook = contacts.some(
@@ -53,11 +36,18 @@ const ContactForm = () => {
     resetForm();
   };
 
+  useEffect(() => {
+    if (error) {
+      toast.error(error, { pauseOnHover: false });
+      dispatch(changeError());
+    }
+  }, [error, dispatch]);
+
   return (
     <Formik
       initialValues={{ name: '', phone: '' }}
       onSubmit={handleSubmit}
-      validationSchema={validationSchema}
+      validationSchema={contactValidationSchema}
     >
       {({ errors, touched }) => (
         <Form autoComplete="off">

@@ -12,8 +12,9 @@ const handlePending = state => {
 };
 
 const handleRejected = (state, action) => {
+  console.log('action.payload', action.payload);
   state.isRefreshing = false;
-  state.error = action.payload.message;
+  state.error = action.payload.message || false;
 };
 
 const initialState = {
@@ -35,6 +36,11 @@ const initialState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
+  reducers: {
+    changeError(state, action) {
+      state.error = false;
+    },
+  },
   extraReducers: {
     [register.fulfilled](state, action) {
       state.user = action.payload;
@@ -92,4 +98,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { changeError } = authSlice.actions;
 export const authReducer = authSlice.reducer;

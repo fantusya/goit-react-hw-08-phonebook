@@ -36,3 +36,22 @@ export const emailValidationSchema = Yup.object({
     .min(6, 'At least 6 symbols')
     .required('Required field'),
 });
+
+export const contactValidationSchema = Yup.object({
+  name: Yup.string()
+    .matches(
+      /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
+      'Only letters are allowed'
+    )
+    .min(2, 'At least 2 symbols')
+    .max(30, 'Maximum 30 symbols')
+    .required('Required field'),
+  phone: Yup.string()
+    .matches(
+      /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
+      ' Digits are allowed'
+    )
+    .min(5, 'At least 5 symbols')
+    .max(30, 'Maximum 30 symbols')
+    .required('Required field'),
+});

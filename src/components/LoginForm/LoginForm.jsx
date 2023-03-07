@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 import { toast } from 'react-toastify';
 
+import { useAuth } from 'hooks';
 import {
   loginValidationSchema,
   emailValidationSchema,
 } from 'helpers/validationSchemas';
-import { useAuth } from 'hooks';
 import { logIn, resendVerifyEmail } from 'redux/auth/operations';
+import { changeError } from 'redux/auth/slice';
 import ModalMenu from 'components/ModalMenu';
 import {
   ModalAvatarContent,
@@ -31,18 +32,26 @@ const LoginForm = () => {
   const { error } = useAuth();
 
   const dispatch = useDispatch();
+
   const handleSubmit = ({ email, password }, { resetForm }) => {
     dispatch(logIn({ email, password }));
     resetForm();
   };
 
   const handleSubmitEmail = ({ email }, { resetForm }) => {
-    console.log(email);
     dispatch(resendVerifyEmail({ email }));
-    toast.info(`Check your email`, { pauseOnHover: false });
+    toast.info('Check your email', { pauseOnHover: false });
     resetForm();
     setShowModal(!showModal);
+    dispatch(changeError());
   };
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error, { pauseOnHover: false });
+      // dispatch(changeError());
+    }
+  }, [error, dispatch]);
 
   return (
     <>
@@ -97,6 +106,7 @@ const LoginForm = () => {
             >
               &times;
             </CloseBtn>
+
             <Formik
               initialValues={{ email: '' }}
               onSubmit={handleSubmitEmail}

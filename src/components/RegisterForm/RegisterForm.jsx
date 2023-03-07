@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 import { toast } from 'react-toastify';
+import { changeError } from 'redux/auth/slice';
 
 import { registerValidationSchema } from 'helpers/validationSchemas';
 import { useAuth } from 'hooks';
@@ -16,17 +18,19 @@ import {
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
+  const { error } = useAuth();
 
   const handleSubmit = ({ name, email, password }, { resetForm }) => {
     dispatch(register({ email, password }));
     resetForm();
   };
 
-  const { error } = useAuth();
-  if (error) {
-    console.log('HI FROM error', error);
-    toast.error('error', { pauseOnHover: false });
-  }
+  useEffect(() => {
+    if (error) {
+      toast.error(error, { pauseOnHover: false, theme: 'colored' });
+      dispatch(changeError());
+    }
+  }, [error, dispatch]);
 
   return (
     <>

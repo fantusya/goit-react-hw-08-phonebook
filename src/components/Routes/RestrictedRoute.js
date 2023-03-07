@@ -16,5 +16,10 @@ export const RestrictedRouteRegister = ({
   failedOrNotRegistered: Form,
 }) => {
   const { needToVerify } = useAuth();
+
+  // if (typeof error === 'string') {
+  //   console.log('HI FROM error', error);
+  //   toast.error('error', { pauseOnHover: false });
+  // }
   return needToVerify ? MessageComponent : Form;
 };
