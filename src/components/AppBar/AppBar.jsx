@@ -21,8 +21,7 @@ const AppBar = () => {
   return (
     <Box
       as="header"
-      pt={[4, 4, 4, 5, 5]}
-      pb={[4, 4, 4, 5, 5]}
+      py={[4, 4, 4, 5, 5]}
       borderBottom="1px solid"
       borderBottomColor="semiSilver"
     >
@@ -34,27 +33,7 @@ const AppBar = () => {
             justifyContent="space-between"
           >
             <Navigation />
-
-            {isLoggedIn && !isDesktop && (
-              <Box
-                mt={5}
-                p={4}
-                display="inline-block"
-                border="1px dashed silver"
-                borderRadius="normal"
-                backgroundColor="userNav"
-                textAlign="start"
-                lineHeight="body"
-              >
-                <UserMenu />
-              </Box>
-            )}
-
-            {isLoggedIn && isDesktop && (
-              <Box display="inline-block" textAlign="start">
-                <UserMenu />
-              </Box>
-            )}
+            {isLoggedIn && <UserMenu />}
           </Box>
 
           {!isLoggedIn && isMobile && (

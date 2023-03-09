@@ -34,19 +34,37 @@ export const rotateCenter = keyframes`
     transform: rotate(360deg);
   }`;
 
-export const flipLeft = keyframes`
-    0% {
-      transform: translateX(0) rotateY(0);
-      transform-origin: 0% 50%;
-    }
-    100% {
-      transform: translateX(-100%) rotateY(-180deg);
-      transform-origin: 100% 0%;
-    }
-    /* 100% {
-    transform: translateX(0) rotateY(-360deg);
-    transform-origin: 0% 50%;
-  } */
+export const rotateY = keyframes`
+  0% {
+    transform: rotateY(0);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+`;
+
+export const heartbeat = keyframes`
+   from {
+    transform: scale(1);
+    transform-origin: center center;
+    animation-timing-function: ease-out;
+  }
+  10% {
+    transform: scale(1.2);
+    animation-timing-function: ease-in;
+  }
+  17% {
+    transform: scale(0.98);
+    animation-timing-function: ease-out;
+  }
+  33% {
+    transform: scale(0.87);
+    animation-timing-function: ease-in;
+  }
+  45% {
+    transform: scale(1);
+    animation-timing-function: ease-out;
+  }
 `;
 
 export const modalMenuEmersion = keyframes`

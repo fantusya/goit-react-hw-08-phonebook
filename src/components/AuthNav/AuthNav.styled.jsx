@@ -6,7 +6,6 @@ export const NavLink = styled(Link)`
   padding: ${p => p.theme.space[1]}px ${p => p.theme.space[3]}px;
 
   font-family: ${p => p.theme.fonts.heading};
-  /* font-size: ${p => p.theme.fontSizes[3]}px; */
   letter-spacing: ${p => p.theme.letterSpacing.big};
 
   border: ${p => p.theme.borders.normal} ${p => p.theme.colors.transparent};

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from 'constants/breakpoints';
 
 export const ContactListTable = styled.table`
   text-align: center;
@@ -18,7 +19,10 @@ export const ContactListThead = styled.thead`
 
 export const ContactListTbody = styled.tbody`
   td {
-    padding: ${p => p.theme.space[3]}px ${p => p.theme.space[4]}px;
+    padding: ${p => p.theme.space[3]}px;
+    @media ${device.tablet} {
+      padding: ${p => p.theme.space[3]}px ${p => p.theme.space[4]}px;
+    }
 
     font-size: ${p => p.theme.fontSizes[2]};
     font-family: ${p => p.theme.fonts.body};

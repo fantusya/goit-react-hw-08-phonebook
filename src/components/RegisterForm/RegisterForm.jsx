@@ -21,7 +21,7 @@ const RegisterForm = () => {
   const { error } = useAuth();
 
   const handleSubmit = ({ name, email, password }, { resetForm }) => {
-    dispatch(register({ email, password }));
+    dispatch(register({ name, email, password }));
     resetForm();
   };
 

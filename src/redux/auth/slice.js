@@ -19,11 +19,9 @@ const handleRejected = (state, action) => {
 
 const initialState = {
   user: {
-    // name: null,
+    name: null,
     email: null,
     subscription: 'starter',
-    verificationToken: null,
-    verify: false,
     avatarURL: null,
   },
   token: null,
@@ -60,10 +58,9 @@ const authSlice = createSlice({
     },
     [logOut.fulfilled](state) {
       state.user = {
+        name: null,
         email: null,
         subscription: 'starter',
-        verificationToken: null,
-        verify: false,
         avatarURL: null,
       };
       state.token = null;

@@ -48,12 +48,14 @@ export const theme = {
     heading: 1.125,
   },
   letterSpacing: {
+    small: '0.03em',
     big: '0.08em',
   },
   borders: {
     none: 'none',
     normal: '1px solid',
     doubled: '2px solid',
+    normalDashed: '1px dashed',
     dashed: '2px dashed',
   },
   radii: {

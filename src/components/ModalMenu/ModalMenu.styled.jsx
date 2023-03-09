@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components';
+import { device } from 'constants/breakpoints';
 import { modalMenuEmersion, avatarModalEmersion } from 'keyframes';
 
 export const ModalBackdrop = styled.div`
+  padding: 0 ${p => p.theme.space[4]}px;
   position: fixed;
   top: 0;
   left: 0;
@@ -63,6 +65,9 @@ export const CloseBtn = styled.button`
     css`
       width: 20px;
       height: 20px;
+      @media ${device.miniMobile} {
+        right: 22%;
+      }
     `};
 
   opacity: ${p => (p.closeModal ? 1 : 0)};

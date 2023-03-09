@@ -16,10 +16,6 @@ import {
 
 const ContactList = () => {
   const { visibleContacts, contacts, isLoading, error } = useContacts();
-  // console.log(visibleContacts);
-  // const { contacts } = useContacts();
-  // const { isLoading } = useContacts();
-  // const { error } = useContacts();
 
   const isMobile = useMediaQuery({
     query: '(min-device-width: 480px)',

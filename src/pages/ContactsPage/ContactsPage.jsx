@@ -8,6 +8,7 @@ import { fetchContacts } from 'redux/contacts/operations';
 import ContactForm from 'components/ContactForm';
 import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
+import Footer from 'components/Footer';
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
@@ -17,49 +18,46 @@ const ContactsPage = () => {
   }, [dispatch]);
 
   return (
-    <main>
-      <Box as="section" py={5}>
-        <Container>
-          <Box
-            pl={[null, null, null, null, '50px']}
-            display={['block', null, null, null, 'flex']}
-            flexDirection="column"
-            alignItems="flex-start"
-            justifyContent="space-around"
-            gridGap={5}
-            textAlign="center"
-          >
-            <PageTitle>Phonebook</PageTitle>
+    <>
+      <Box as="main" flex="1 1 auto">
+        <Box as="section" py={5}>
+          <Container>
             <Box
-              display={[null, null, null, null, 'inline-flex']}
-              flexDirection={['column', null, null, null, 'row']}
+              pl={[null, null, null, null, '50px']}
+              display={['block', null, null, null, 'flex']}
+              flexDirection="column"
               alignItems="flex-start"
               justifyContent="space-around"
-              gridGap={['50px', null, null, null, '150px']}
+              gridGap={5}
+              textAlign="center"
             >
+              <PageTitle>Phonebook</PageTitle>
               <Box
-                // display="inline-flex"
-                // flexDirection="column"
-                // alignItems="center"
-                // justifyContent="center"
-                mb={[5, null, null, null, 0]}
+                display={[null, null, null, null, 'inline-flex']}
+                flexDirection={['column', null, null, null, 'row']}
+                alignItems="flex-start"
+                justifyContent="space-around"
+                gridGap={['50px', null, null, null, '150px']}
               >
-                <ContactForm />
-              </Box>
-              <Box
-                display="inline-flex"
-                flexDirection="column"
-                alignItems={['center', null, null, null, 'flex-start']}
-              >
-                <ContactsTitle>Contacts</ContactsTitle>
-                <Filter />
-                <ContactList />
+                <Box mb={[5, null, null, null, 0]}>
+                  <ContactForm />
+                </Box>
+                <Box
+                  display="inline-flex"
+                  flexDirection="column"
+                  alignItems={['center', null, null, null, 'flex-start']}
+                >
+                  <ContactsTitle>Contacts</ContactsTitle>
+                  <Filter />
+                  <ContactList />
+                </Box>
               </Box>
             </Box>
-          </Box>
-        </Container>
+          </Container>
+        </Box>
       </Box>
-    </main>
+      <Footer />
+    </>
   );
 };
 

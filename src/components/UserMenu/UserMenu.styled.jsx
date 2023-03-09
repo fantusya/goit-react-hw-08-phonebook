@@ -3,10 +3,34 @@ import { device } from 'constants/breakpoints';
 import { previewImgEmersion } from 'keyframes';
 import { CloseBtn } from 'components/ModalMenu/ModalMenu.styled';
 
+export const UserBlock = styled.div`
+  margin-top: ${p => p.theme.space[5]}px;
+  @media ${device.desktop} {
+    margin-top: ${p => p.theme.space[0]}px;
+  }
+  padding: ${p => p.theme.space[4]}px;
+
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: ${p => p.theme.space[4]}px;
+
+  line-height: ${p => p.theme.lineHeights.body};
+
+  border: ${p => p.theme.borders.normalDashed} ${p => p.theme.colors.silver};
+  border-radius: ${p => p.theme.radii.normal};
+
+  background-color: ${p => p.theme.colors.userNav};
+`;
+
 export const UserWelcome = styled.p`
   display: inline-block;
 
   font-family: ${p => p.theme.fonts.heading};
+  font-size: ${p => p.theme.fontSizes[4]};
+  @media ${device.miniMobile} {
+    font-size: ${p => p.theme.fontSizes[1]};
+  }
   letter-spacing: ${p => p.theme.letterSpacing.big};
   text-shadow: 3px 2px 2px ${p => p.theme.colors.semiWhite};
 
@@ -16,12 +40,13 @@ export const UserWelcome = styled.p`
 export const LogoutBtn = styled.button`
   margin: ${p => p.theme.space[0]}px;
   padding: ${p => p.theme.space[2]}px ${p => p.theme.space[4]}px;
+  align-self: flex-end;
 
   text-align: center;
   font-family: ${p => p.theme.fonts.heading};
-  font-size: ${p => p.theme.fontSizes[2]};
-  @media ${device.mobile} {
-    font-size: ${p => p.theme.fontSizes[3]};
+  font-size: ${p => p.theme.fontSizes[3]};
+  @media ${device.miniMobile} {
+    font-size: ${p => p.theme.fontSizes[1]};
   }
   letter-spacing: ${p => p.theme.letterSpacing.big};
 
@@ -46,16 +71,16 @@ export const LogoutBtn = styled.button`
 `;
 
 export const HiddenInput = styled.input`
-  opacity: 0;
-  overflow: hidden;
-
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
   padding: ${p => p.theme.space[0]}px;
-  margin: ${p => p.theme.space[0]}px;
-
-  height: ${p => p.theme.space[0]}px;
-  width: ${p => p.theme.space[0]}px;
-
-  line-height: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 `;
 
 export const AvatarBtn = styled.button`
@@ -86,6 +111,9 @@ export const ModalAvatarBtn = styled.button`
   position: relative;
 
   padding: ${p => p.theme.space[4]}px ${p => p.theme.space[5]}px;
+  /* @media ${device.miniMobile} {
+    padding: ${p => p.theme.space[4]}px ${p => p.theme.space[3]}px;
+  } */
   margin: ${p => p.theme.space[0]}px;
 
   font-family: ${p => p.theme.fonts.monospace};
@@ -144,6 +172,7 @@ export const ModalAvatarBtn = styled.button`
 export const PreviewContainer = styled.div`
   position: relative;
   display: inline-block;
+  text-align: center;
 
   animation: ${previewImgEmersion} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     alternate forwards;
@@ -156,4 +185,12 @@ export const PreviewContainer = styled.div`
 export const AvatarImg = styled.img`
   display: block;
   border-radius: ${p => p.theme.radii.round};
+  @media ${device.miniMobile} {
+    width: 30px;
+  }
+`;
+
+export const PreviewImg = styled.img`
+  width: 120px;
+  border: ${p => p.theme.borders.normal} ${p => p.theme.colors.silver};
 `;

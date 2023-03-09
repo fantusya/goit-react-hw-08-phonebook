@@ -26,7 +26,7 @@ const Navigation = () => {
         alignItems="center"
         justifyContent={['space-between', null, null, null, 'flex-start']}
         gridGap={[null, null, null, null, 5]}
-        fontSize={[3, 3, 4, 5]}
+        fontSize={[2, 3, 4, 5, 5]}
       >
         <li>
           <Link to="/">

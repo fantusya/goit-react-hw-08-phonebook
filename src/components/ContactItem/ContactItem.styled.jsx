@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
-import { shakeBottom, rotateCenter, flipLeft } from 'keyframes';
+import { shakeBottom, rotateCenter, rotateY, heartbeat } from 'keyframes';
+import { device } from 'constants/breakpoints';
 
 export const MobileContactInfo = styled.li`
   padding: ${p => p.theme.space[3]}px ${p => p.theme.space[4]}px;
@@ -11,7 +12,7 @@ export const MobileContactInfo = styled.li`
   background-color: ${p => p.theme.colors.tableBody};
   border-radius: 15px;
 
-  :nth-child(3n + 3) {
+  :nth-child(n + 3) {
     padding: ${p => p.theme.space[0]}px;
 
     background-color: ${p => p.theme.colors.transparent};
@@ -32,6 +33,7 @@ export const TableBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: ${p => p.theme.space[4]}px;
 
   outline: none;
   border: ${p => p.theme.borders.normal} ${p => p.theme.colors.transparent};
@@ -61,16 +63,32 @@ export const TableBtn = styled.button`
     props.changeBtn &&
     css`
       &:hover {
-        animation: ${flipLeft} 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955)
-          backwards;
+        animation: ${rotateY} 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+      }
+    `}
+
+    ${props =>
+    props.confirmBtn &&
+    css`
+      &:hover {
+        animation: ${heartbeat} 1.5s ease-in-out infinite both;
+      }
+    `}
+
+    ${props =>
+    props.cancelBtn &&
+    css`
+      &:hover {
+        animation: ${shakeBottom} 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+          both;
       }
     `}
 `;
 
 export const InputChange = styled.input`
   padding: ${p => p.theme.space[2]}px ${p => p.theme.space[3]}px;
+  width: 100%;
 
-  /* font-family: ${p => p.theme.fonts.heading}; */
   font-weight: ${p => p.theme.fontWeights.normal};
 
   border: ${p => p.theme.borders.normal} ${p => p.theme.colors.semiWhite};
@@ -79,4 +97,14 @@ export const InputChange = styled.input`
 
   color: ${p => p.theme.colors.secondary};
   background-color: ${p => p.theme.colors.semiWhite};
+
+  @media ${device.miniMobile} {
+    max-width: 200px;
+  }
+  @media ${device.mobile} {
+    max-width: 130px;
+  }
+  @media ${device.mobile} {
+    max-width: 200px;
+  }
 `;

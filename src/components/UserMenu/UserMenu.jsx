@@ -7,7 +7,13 @@ import { TbCloudUpload } from 'react-icons/tb';
 
 import { logOut, updateAvatar } from 'redux/auth/operations';
 import { useAuth } from 'hooks';
+import ModalMenu from 'components/ModalMenu';
 import {
+  ModalAvatarContent,
+  CloseBtn,
+} from 'components/ModalMenu/ModalMenu.styled';
+import {
+  UserBlock,
   UserWelcome,
   LogoutBtn,
   HiddenInput,
@@ -15,12 +21,8 @@ import {
   ModalAvatarBtn,
   PreviewContainer,
   AvatarImg,
+  PreviewImg,
 } from './UserMenu.styled';
-import ModalMenu from 'components/ModalMenu';
-import {
-  ModalAvatarContent,
-  CloseBtn,
-} from 'components/ModalMenu/ModalMenu.styled';
 
 const UserMenu = () => {
   const [showModal, setShowModal] = useState(false);
@@ -73,35 +75,20 @@ const UserMenu = () => {
   };
 
   return (
-    <Box display="inline-flex" flexDirection="column" alignItems="flex-end">
-      <Box
-        mb={4}
-        display="flex"
-        alignItems="center"
-        gridGap={4}
-        fontSize={[3, 4, 5, 6]}
-      >
-        {/* <form encType="multipart/form-data" onSubmit={handleSubmit}>
-          <input type="file" name="avatar" />
-          <button type='submit'>Load</button>
-        </form> */}
-
-        {isMobile && (
+    <>
+      <UserBlock>
+        <Box display="flex" alignItems="center" gridGap={4}>
           <AvatarBtn onClick={() => setShowModal(!showModal)}>
             <AvatarImg src={user.avatarURL} alt={user.email} />
           </AvatarBtn>
-        )}
 
-        <UserWelcome>Welcome, {user.email}!</UserWelcome>
-      </Box>
+          <UserWelcome>{user.name}</UserWelcome>
+        </Box>
 
-      <LogoutBtn
-        fontSize={[3, 4, 5, 5]}
-        type="button"
-        onClick={() => dispatch(logOut())}
-      >
-        Log out
-      </LogoutBtn>
+        <LogoutBtn type="button" onClick={() => dispatch(logOut())}>
+          Log out
+        </LogoutBtn>
+      </UserBlock>
 
       {showModal && (
         <ModalMenu onClose={handleModalClose}>
@@ -110,7 +97,11 @@ const UserMenu = () => {
               &times;
             </CloseBtn>
 
-            <Box display="inline-flex" flexDirection="column" gridGap={4}>
+            <Box
+              display="inline-flex"
+              flexDirection="column"
+              gridGap={[5, 5, 4]}
+            >
               <ModalAvatarBtn onClick={() => filePicker.current.click()}>
                 Choose an avatar
               </ModalAvatarBtn>
@@ -129,9 +120,18 @@ const UserMenu = () => {
                   <TbCloudUpload size={20} />
                 </ModalAvatarBtn>
               )}
+
+              {!isMobile && selectedFile && previewImg && (
+                <PreviewContainer>
+                  <CloseBtn closePreview onClick={handleDeleteImg}>
+                    &times;
+                  </CloseBtn>
+                  <PreviewImg src={previewImg} alt="Preview" />
+                </PreviewContainer>
+              )}
             </Box>
 
-            {selectedFile && previewImg && (
+            {isMobile && selectedFile && previewImg && (
               <PreviewContainer>
                 <CloseBtn closePreview onClick={handleDeleteImg}>
                   &times;
@@ -147,8 +147,13 @@ const UserMenu = () => {
           </ModalAvatarContent>
         </ModalMenu>
       )}
-    </Box>
+    </>
   );
 };
 
 export default UserMenu;
+
+/* <form encType="multipart/form-data" onSubmit={handleSubmit}>
+      <input type="file" name="avatar" />
+        <button type='submit'>Load</button>
+  </form> */

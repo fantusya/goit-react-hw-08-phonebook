@@ -4,16 +4,16 @@ import { device } from 'constants/breakpoints';
 
 export const Form = styled(FormikForm)`
   @media ${device.miniMobile} {
-    padding: ${p => p.theme.space[5] + 8}px ${p => p.theme.space[4]}px;
-    gap: ${p => p.theme.space[6] - 9}px;
+    padding: ${p => p.theme.space[6]}px ${p => p.theme.space[4]}px;
   }
   @media ${device.mobile} {
     padding: ${p => p.theme.space[6]}px ${p => p.theme.space[5]}px;
-    gap: ${p => p.theme.space[6]}px;
   }
   @media ${device.desktop} {
     width: 360px;
   }
+
+  gap: ${p => p.theme.space[6]}px;
 
   max-width: 410px;
   width: 100%;
