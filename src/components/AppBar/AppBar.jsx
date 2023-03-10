@@ -14,10 +14,6 @@ const AppBar = () => {
     query: '(min-device-width: 480px)',
   });
 
-  const isDesktop = useMediaQuery({
-    query: '(min-device-width: 1200px)',
-  });
-
   return (
     <Box
       as="header"
