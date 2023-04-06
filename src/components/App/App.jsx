@@ -24,13 +24,13 @@ const ContactsPage = lazy(() => import('pages/ContactsPage'));
 
 const App = () => {
   const dispatch = useDispatch();
-  const { isRefreshing, isLoggedIn } = useAuth();
+  const { isRefreshing } = useAuth();
 
   useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(refreshUser());
-    }
-  }, [dispatch, isLoggedIn]);
+    // if (isLoggedIn) {
+    dispatch(refreshUser());
+    // }
+  }, [dispatch]);
 
   return isRefreshing ? (
     <Box
