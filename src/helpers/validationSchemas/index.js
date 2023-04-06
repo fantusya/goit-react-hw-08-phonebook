@@ -32,7 +32,7 @@ export const loginValidationSchema = Yup.object({
 
 export const emailValidationSchema = Yup.object({
   email: Yup.string()
-    .email('Not valid email pattern')
+    .email('Invalid email')
     .min(6, 'At least 6 symbols')
     .required('Required field'),
 });
@@ -47,10 +47,7 @@ export const contactValidationSchema = Yup.object({
     .max(30, 'Maximum 30 symbols')
     .required('Required field'),
   phone: Yup.string()
-    .matches(
-      /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
-      ' Digits are allowed'
-    )
+    .matches(/[+]?[(]?[0-9]{3}[)]?[-]?[0-9]{3}[-]?[0-9]{4,6}/, 'Invalid phone')
     .min(5, 'At least 5 symbols')
     .max(30, 'Maximum 30 symbols')
     .required('Required field'),

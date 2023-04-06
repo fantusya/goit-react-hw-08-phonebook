@@ -59,7 +59,7 @@ const ContactForm = () => {
             )}
           </FormLabelContainer>
           <FormLabelContainer>
-            <Field name="phone" type="tel" placeholder="+38-(012)-345-67-89" />
+            <Field name="phone" type="tel" placeholder="+380123456789" />
             <FormLabel>Number</FormLabel>
             {errors.phone && touched.phone && (
               <ErrorMessageCustom component="span" name="phone" />
